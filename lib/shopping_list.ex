@@ -1,27 +1,32 @@
 defmodule ShoppingList do
-  alias ShoppingList.Result
+  alias ShoppingList.{Item, Result}
 
   def build(itens, emails) do
     itens
     |> total_itens
     |> sum_all_itens
-    |> media(emails)
-    |> show_result(emails)
+    |> mean(emails)
+    |> show_results(emails)
   end
 
-  def show_result(result, emails) do
-    Enum.map(emails, fn email -> Result.build(email, result) end)
+  def show_results(result, emails) do
+    emails
+    |> Enum.map(&Result.build(&1, result))
   end
+
+  def sum_total(%Item{price: price, quantity: quantity} = _result), do: price * quantity
 
   def total_itens(itens) do
-    Enum.map(itens, fn item -> item[:price] * item[:quantity] end)
+    itens
+    |> Enum.map(&sum_total/1)
   end
 
   def sum_all_itens(totals) do
-    Enum.reduce(totals, 0, fn value, acc -> value + acc end)
+    totals
+    |> Enum.reduce(&+/2)
   end
 
-  def media(totais, emails) do
+  def mean(totais, emails) do
     div(totais, length(emails))
   end
 end
