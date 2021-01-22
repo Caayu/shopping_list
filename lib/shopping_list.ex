@@ -30,9 +30,7 @@ defmodule ShoppingList do
 
   defp sum_total(%Item{price: price, quantity: quantity} = _result), do: price * quantity
 
-  defp total_items(items) do
-    Enum.map(items, &sum_total/1)
-  end
+  defp total_items(items), do: Enum.map(items, &sum_total/1)
 
   defp full_price(total) do
     Enum.reduce(total, &+/2)
@@ -64,7 +62,5 @@ defmodule ShoppingList do
     end)
   end
 
-  defp build_results(result, emails) do
-    Enum.map(emails, &Result.build(&1, result))
-  end
+  defp build_results(result, emails), do: Enum.map(emails, &Result.build(&1, result))
 end
