@@ -32,9 +32,7 @@ defmodule ShoppingList do
 
   defp total_items(items), do: Enum.map(items, &sum_total/1)
 
-  defp full_price(total) do
-    Enum.reduce(total, &+/2)
-  end
+  defp full_price(total), do: Enum.reduce(total, &+/2)
 
   defp bill(total, emails) do
     email_length = length(emails)
@@ -57,8 +55,8 @@ defmodule ShoppingList do
   end
 
   defp lack_money(result) do
-    List.update_at(result, -1, fn %Result{total: total} = el ->
-      %Result{el | total: total + 1}
+    List.update_at(result, -1, fn %Result{total: total} = item ->
+      %Result{item | total: total + 1}
     end)
   end
 
