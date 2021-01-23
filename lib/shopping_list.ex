@@ -12,7 +12,7 @@ defmodule ShoppingList do
   iex(1)> items = [%ShoppingList.Item{name: "Omo", price: 500, quantity: 1}, %ShoppingList.Item{name: "Ariel", price: 500, quantity: 1}]
   iex(2)> emails = ["naruto@mail.com", "luffy@mail.com", "eren@mail.com"]
   iex(3)> ShoppingList.build(items, emails)
-  [
+  iex(4) [
   %ShoppingList.Result{email: "naruto@mail.com", total: 333},
   %ShoppingList.Result{email: "luffy@mail.com", total: 333},
   %ShoppingList.Result{email: "eren@mail.com", total: 334}
